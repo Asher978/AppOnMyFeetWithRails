@@ -10,12 +10,16 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 
+import RegisterForm from './components/RegisterForm';
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        
-      </div>
+      <Router>
+        <div className="App">
+          <Route exact path='/register' component={RegisterForm} />
+        </div>
+      </Router>
     );
   }
 }

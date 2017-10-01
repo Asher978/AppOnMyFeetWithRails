@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 const LoginForm = props => {
     return (
@@ -9,21 +11,33 @@ const LoginForm = props => {
                     Log-in to your account
                 </div>
                 </h2>
-                <form action="https://s.codepen.io/voltron2112/debug/PqrEPM?" method="get" className="ui large form">
+                <form className="ui large form" onSubmit={props.handleLoginSubmit}>
                 <div className="ui stacked secondary  segment">
                     <div className="field">
-                    <div className="ui left icon input">
-                        <i className="user icon"></i>
-                        <input type="text" name="email" placeholder="UserName" />
-                    </div>
+                        <div className="ui left icon input">
+                            <i className="user icon"></i>
+                            <input 
+                                type="text" 
+                                name="loginUserName" 
+                                placeholder="UserName"
+                                value={props.loginUserName}
+                                onChange={props.handleInputChange}    
+                            />
+                        </div>
                     </div>
                     <div className="field">
-                    <div className="ui left icon input">
-                        <i className="lock icon"></i>
-                        <input type="password" name="password" placeholder="Password" />
+                        <div className="ui left icon input">
+                            <i className="lock icon"></i>
+                            <input 
+                                type="password" 
+                                name="loginPassword" 
+                                placeholder="Password"
+                                value={props.loginPassword} 
+                                onChange={props.handleInputChange}    
+                            />
+                        </div>
                     </div>
-                    </div>
-                    <div className="ui fluid large teal submit button">Login</div>
+                    <div className="ui fluid large green submit button">Login</div>
                 </div>
 
                 <div className="ui error message"></div>
@@ -31,7 +45,7 @@ const LoginForm = props => {
                 </form>
 
                 <div className="ui message">
-                New to us? <a href="https://s.codepen.io/voltron2112/debug/PqrEPM?">Register</a>
+                New to us? <Link to="/register">Register</Link>
                 </div>
             </div>
         </div>

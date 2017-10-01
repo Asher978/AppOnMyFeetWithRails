@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 
 import RegisterForm from './components/RegisterForm';
+import LoginForm from './components/LoginForm';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route exact path='/register' component={RegisterForm} />
+          <Route exact path='/login' component={LoginForm} />
         </div>
       </Router>
     );

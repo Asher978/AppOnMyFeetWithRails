@@ -12,7 +12,7 @@ const LoginForm = props => {
                 </div>
                 </h2>
                 <form className="ui large form" onSubmit={props.handleLoginSubmit}>
-                <div className="ui stacked secondary  segment">
+                <div className="ui stacked secondary segment">
                     <div className="field">
                         <div className="ui left icon input">
                             <i className="user icon"></i>
@@ -32,12 +32,12 @@ const LoginForm = props => {
                                 type="password" 
                                 name="loginPassword" 
                                 placeholder="Password"
-                                value={props.loginPassword} 
+                                value={props.loginPassword}
                                 onChange={props.handleInputChange}    
                             />
                         </div>
                     </div>
-                    <div className="ui fluid large green submit button">Login</div>
+                    <input className="ui fluid large green submit button" type="submit" value="Log in!" />
                 </div>
 
                 <div className="ui error message"></div>

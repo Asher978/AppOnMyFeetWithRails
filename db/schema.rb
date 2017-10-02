@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001012845) do
+ActiveRecord::Schema.define(version: 20171002015610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,6 @@ ActiveRecord::Schema.define(version: 20171001012845) do
     t.string "auth_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "half_marathons"
-    t.integer "full_marathons"
-    t.integer "total_miles"
-    t.string "picture"
     t.boolean "admin", default: false
     t.index ["username"], name: "index_users_on_username"
   end

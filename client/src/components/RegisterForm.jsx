@@ -2,32 +2,81 @@ import React from 'react';
 
 const RegisterForm = props => {
     return (
-        <div className="ui equal width form">
-            <div className="fields">
-                <div className="field error">
-                    <label>Username</label>
-                    <input type="text" placeholder="Username" />
+        <div className="ui middle aligned center aligned grid">
+            <div className="column">
+                <h2 className="ui image header">
+                <div className="content">
+                    Join App On My Feet Today!
+                </div>
+                </h2>
+            <form className="ui form attached fluid segment" onSubmit={props.handleRegisterSubmit}>
+                <div className="field">
+                    <div className="ui left icon input">
+                        <i className="id badge icon"></i>
+                        <input 
+                            placeholder="Username" 
+                            type="text" 
+                            name="registerUserName"
+                            value={props.registerUserName}
+                            onChange={props.handleInputChange}
+                        />
+                    </div>
                 </div>
                 <div className="field">
-                    <label>Password</label>
-                    <input type="password" />
+                    <div className="ui left icon input">
+                        <i className="lock icon"></i>    
+                        <input 
+                            type="password" 
+                            placeholder="Password"
+                            name="registerPassword"
+                            value={props.registerPassword}
+                            onChange={props.handleInputChange}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="equal width fields">
+                <div className="two fields">
+                    <div className="field">
+                        <div className="ui left icon input">
+                            <i className="user icon"></i>                        
+                            <input 
+                                placeholder="First Name" 
+                                type="text" 
+                                name="registerFirstName"
+                                value={props.registerFirstName}
+                                onChange={props.handleInputChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="field">
+                        <div className="ui left icon input">
+                            <i className="user icon"></i>  
+                            <input 
+                                placeholder="Last Name" 
+                                type="text" 
+                                name="registerLastName"
+                                value={props.registerLastName}
+                                onChange={props.handleInputChange}
+                            />
+                        </div>
+                    </div>
+                </div>
                 <div className="field">
-                    <label>First name</label>
-                    <input type="text" placeholder="First Name" />
+                    <div className="ui left icon input">
+                        <i className="mail icon"></i>  
+                        <input 
+                            placeholder="Email Addrress" 
+                            type="email" 
+                            name="registerEmail"
+                            value={props.registerEmail}
+                            onChange={props.handleInputChange}
+                        />
+                    </div>
                 </div>
-                <div className="field">
-                    <label>Middle name</label>
-                    <input type="text" placeholder="Middle Name" />
-                </div>
-                <div className="field">
-                    <label>Last name</label>
-                    <input type="text" placeholder="Last Name" />
-                </div>
-            </div>
+                <input className="ui fluid large green submit button" type="submit" value="Regsiter!" />
+            </form>
         </div>
+    </div>
+    
     )
 }
 

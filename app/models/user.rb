@@ -3,6 +3,9 @@ class User < ApplicationRecord
     has_secure_password
     has_secure_token :auth_token
     has_many :runs
+    has_one :profile
+    after_create :build_profile
+    accepts_nested_attributes_for :profile
   
     def invalidate_token
       self.update_columns(auth_token: nil)
@@ -14,4 +17,9 @@ class User < ApplicationRecord
         user
       end
     end
+
+    def build_profile
+      Profile.create(user: self)
+    end
+
 end

@@ -4,52 +4,42 @@ import { Link } from 'react-router-dom';
 
 const LoginForm = props => {
     return (
-        <div className="ui middle aligned center aligned grid">
-            <div className="column">
-                <h2 className="ui image header">
-                <div className="content">
-                    Log-in to your account
+        <div className="login">
+            <div className="container">
+                <ol className="breadcrumb main-color-bg">
+                    <li>Please enter your credentials to Login!</li>
+                </ol>
+            </div>  
+            <form className="container" onSubmit={props.handleLoginSubmit}>
+                <div className='form-group'>
+                    <span className='input-group'>
+                        <span className='input-group-addon main-color-bg'>UserName</span>
+                        <input 
+                        className='form-control' 
+                        type="text"
+                        name="loginUserName"
+                        placeholder="User Name"
+                        value={props.loginUserName}
+                        onChange={props.handleInputChange}
+                        required />
+                    </span>
                 </div>
-                </h2>
-                <form className="ui large form" onSubmit={props.handleLoginSubmit}>
-                <div className="ui stacked secondary segment">
-                    <div className="field">
-                        <div className="ui left icon input">
-                            <i className="user icon"></i>
-                            <input 
-                                type="text" 
-                                name="loginUserName" 
-                                placeholder="UserName"
-                                value={props.loginUserName}
-                                onChange={props.handleInputChange}    
-                            />
-                        </div>
-                    </div>
-                    <div className="field">
-                        <div className="ui left icon input">
-                            <i className="lock icon"></i>
-                            <input 
-                                type="password" 
-                                name="loginPassword" 
-                                placeholder="Password"
-                                value={props.loginPassword}
-                                onChange={props.handleInputChange}    
-                            />
-                        </div>
-                    </div>
-                    <input className="ui fluid large green submit button" type="submit" value="Log in!" />
+                <div className='form-group'>
+                    <span className='input-group'>
+                        <span className='input-group-addon main-color-bg'>Password</span>
+                        <input 
+                        className='form-control' 
+                        type="password"
+                        name="loginPassword"
+                        placeholder="Password"
+                        value={props.loginPassword}
+                        onChange={props.handleInputChange}
+                        required />
+                    </span>
                 </div>
-
-                <div className="ui error message"></div>
-
-                </form>
-
-                <div className="ui message">
-                New to us? <Link to="/register">Register</Link>
-                </div>
-            </div>
+                <input type="submit" value="Register!" className="main-color-bg btn-lg btn-block" />
+            </form>
         </div>
-
     )
 }
 

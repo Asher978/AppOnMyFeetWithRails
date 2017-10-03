@@ -23,13 +23,14 @@ const Nav = props => {
                             <li><Link to="/login">Login</Link></li>
                             <li><Link to="/register">Register</Link></li>
                         </ul>
-                        ) : (
-                            <ul className="nav navbar-nav navbar-right">
-                                <li><Link to="/">Home</Link></li>                                
-                                <li><Link to="/profile">My Profile</Link></li>
-                                <li><Link to="/logout" onClick={props.logoutUser}>Log Out</Link></li>
-                            </ul>
-                        )}
+                    ) : (
+                        <ul className="nav navbar-nav navbar-right">
+                            <li><Link to="/">Home</Link></li>                                
+                            <li><Link to="/profile">My Profile</Link></li>
+                            <li><Link to="/logout" onClick={props.logoutUser}>Log Out</Link></li>
+                            <p className="navbar-text">Signed in as {props.user.firstname}</p>
+                        </ul>
+                    )}
                 </div>
             </div>
         </nav>

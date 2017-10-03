@@ -108,7 +108,7 @@ body > .grid {
 }
 .navbar .navbar-collapse,
 .navbar .navbar-form {
-  border-color: #f2f5f6;
+  border: 0px;
 }
 .navbar .navbar-link {
   color: #f2f5f6;
@@ -131,4 +131,65 @@ body > .grid {
     color: #ffbbbc;
     background-color: #c0392b;
   }
+}
+
+/* My Custom Color Class for re-use purpose  */
+
+.main-color-bg  {
+  background-color: #e74c3c !important;
+  border-color: #c0392b !important;
+  color: #ffffff !important;
+}
+
+                /* PROFILE PAGE SEETINGS */
+                   /* HEADER SETTINGS */
+
+#header  {
+  background: #333333;
+  color: #ffffff;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  
+}
+
+#header .create  {
+  padding-top: 50px;
+}
+
+/* BREADCRUMBS */
+
+.breadcrumb  {
+  background: #cccccc;
+  color: #333333;
+}
+
+.breadcrumb a  {
+  color: #333333;
+}
+
+.dash-box  {
+  text-align: center;
+}
+
+.pic  {
+  height: 100px;
+  float: right;
+  border-radius: 50px;
+}
+
+
+                                              /* RESGISTER PAGE SETTINGS */
+
+.register, .login,  {
+  margin: 0 auto;
+}               
+
+.regbtn  {
+  margin: 0 auto;
+}
+
+.register ol, .login ol  {
+  text-align: center;
+  margin-top: 4%;
+  font-size: 1.6em;
 }

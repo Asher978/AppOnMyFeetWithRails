@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './reset.css';
 import './App.css';
 
 import {
@@ -13,6 +12,7 @@ import Auth from './modules/Auth';
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import Nav from './components/Nav';
+import Profile from './components/Profile';
 
 class App extends Component {
   constructor () {
@@ -26,6 +26,7 @@ class App extends Component {
       registerEmail: '',
       registerFirstName: '',
       registerLastName: '',
+      user: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
@@ -47,13 +48,13 @@ class App extends Component {
       username: this.state.loginUserName,
       password: this.state.loginPassword,
     }).then(res => {
-      console.log(res);
       if (res.data.token) {
         Auth.authenticateToken(res.data.token);
         this.setState({
           auth: Auth.isUserAuthenticated(),
           loginUserName: '',
           loginUserPassword: '',
+          user: res.data.user,
         })
       }
     }).catch(err => {
@@ -103,7 +104,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Nav logoutUser={this.logoutUser} />
+          <Nav logoutUser={this.logoutUser} user={this.state.user} />
           <Route exact path='/register'
           render={() =>
               !this.state.auth ? (
@@ -117,7 +118,7 @@ class App extends Component {
                   handleRegisterSubmit={this.handleRegisterSubmit}
                 />
               ) : (
-                <Redirect to="/" />
+                <Redirect to="/profile" />
               )}
           />
           <Route exact path='/login' 
@@ -131,9 +132,15 @@ class App extends Component {
                   handleLoginSubmit={this.handleLoginSubmit}
                 />
               ) : (
-                <Redirect to="/" />
+                <Redirect to="/profile" />
               )}
            />
+           <Route
+            exact
+            path="/profile"
+            render={() =>
+              this.state.auth ? <Profile auth={this.state.auth} /> : <Redirect to="/login" />}
+          />
         </div>
       </Router>
     );

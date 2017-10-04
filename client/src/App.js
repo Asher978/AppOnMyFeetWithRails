@@ -13,12 +13,14 @@ import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
+import RunCreate from './components/RunCreate';
 
 class App extends Component {
   constructor () {
     super();
     this.state = {
       auth: Auth.isUserAuthenticated(),
+      shouldFireRedirect: false,
       loginUserName: '',
       loginPassword: '',
       registerUserName: '',
@@ -27,11 +29,19 @@ class App extends Component {
       registerFirstName: '',
       registerLastName: '',
       user: '',
+      runDate: '',
+      runMiles: '',
+      runStart: '',
+      runStartCity: '',
+      runEnd: '',
+      runEndCity: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
+    this.handleRunSubmit = this.handleRunSubmit.bind(this);
+    this.resetFireRedirect = this.resetFireRedirect.bind(this);
   }
 
   handleInputChange(e) {
@@ -54,7 +64,7 @@ class App extends Component {
           auth: Auth.isUserAuthenticated(),
           loginUserName: '',
           loginUserPassword: '',
-          user: res.data.user,
+          user: res.data.user, //TODO save the user in session storage so on page refresh we dont lose the user from the state
         })
       }
     }).catch(err => {
@@ -100,6 +110,41 @@ class App extends Component {
     })
   }
 
+  handleRunSubmit(e) {
+    e.preventDefault();
+    axios('/runs', {
+      method: 'POST',
+      data: {
+        run: {
+          run_date: this.state.runDate,
+          miles: this.state.runMiles,
+          starting_point: this.state.runStart,
+          starting_city: this.state.runStartCity,
+          ending_point: this.state.runEnd,
+          ending_city: this.state.runEndCity,
+        }
+      },
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      }
+    }).then(res => {
+      this.setState({
+        shouldFireRedirect: true,
+      });
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
+  resetFireRedirect() {
+    if (this.state.shouldFireRedirect) {
+      this.setState({
+        shouldFireRedirect: false,
+      })
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -140,6 +185,26 @@ class App extends Component {
             path="/profile"
             render={() =>
               this.state.auth ? <Profile auth={this.state.auth} /> : <Redirect to="/login" />}
+          />
+          <Route
+            exact
+            path="/newrun"
+            render={() =>
+              this.state.auth ? (
+                <RunCreate
+                  runDate={this.state.runDate}
+                  runMiles={this.state.runMiles}
+                  runStart={this.state.runStart}
+                  runStartCity={this.state.runStartCity}
+                  runEnd={this.state.runEnd}
+                  runEndCity={this.state.runEndCity}
+                  handleInputChange={this.handleInputChange}
+                  handleRunSubmit={this.handleRunSubmit}
+                  shouldFireRedirect={this.state.shouldFireRedirect}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )}
           />
         </div>
       </Router>

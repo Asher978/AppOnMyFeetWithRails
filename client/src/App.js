@@ -14,6 +14,7 @@ import LoginForm from './components/LoginForm';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
 import RunCreate from './components/RunCreate';
+import RunsList from './components/RunsList';
 
 class App extends Component {
   constructor () {
@@ -28,7 +29,7 @@ class App extends Component {
       registerEmail: '',
       registerFirstName: '',
       registerLastName: '',
-      user: '',
+      userName: Auth.getUserName(),
       runDate: '',
       runMiles: '',
       runStart: '',
@@ -58,13 +59,14 @@ class App extends Component {
       username: this.state.loginUserName,
       password: this.state.loginPassword,
     }).then(res => {
+      console.log(res)
       if (res.data.token) {
-        Auth.authenticateToken(res.data.token);
+        Auth.authenticateToken(res.data.token, res.data.user.firstname);
         this.setState({
           auth: Auth.isUserAuthenticated(),
           loginUserName: '',
           loginUserPassword: '',
-          user: res.data.user, //TODO save the user in session storage so on page refresh we dont lose the user from the state
+          userName: Auth.getUserName(),
         })
       }
     }).catch(err => {
@@ -104,6 +106,7 @@ class App extends Component {
       Auth.deauthenticateUser();
       this.setState({
         auth: Auth.isUserAuthenticated(),
+        userName: Auth.getUserName(),
         loginUserName: '',
         loginPassword: '',
       })
@@ -131,6 +134,12 @@ class App extends Component {
     }).then(res => {
       this.setState({
         shouldFireRedirect: true,
+        run_date: '',
+        miles: '',
+        starting_point: '',
+        starting_city: '',
+        ending_point: '',
+        ending_city: '',
       });
     }).catch(err => {
       console.log(err);
@@ -149,7 +158,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Nav logoutUser={this.logoutUser} user={this.state.user} />
+          <Nav logoutUser={this.logoutUser} userName={this.state.userName} />
           <Route exact path='/register'
           render={() =>
               !this.state.auth ? (
@@ -184,7 +193,7 @@ class App extends Component {
             exact
             path="/profile"
             render={() =>
-              this.state.auth ? <Profile auth={this.state.auth} /> : <Redirect to="/login" />}
+              this.state.auth ? <Profile auth={this.state.auth} resetFireRedirect={this.resetFireRedirect} /> : <Redirect to="/login" />}
           />
           <Route
             exact
@@ -205,6 +214,12 @@ class App extends Component {
               ) : (
                 <Redirect to="/login" />
               )}
+          />
+          <Route
+            exact
+            path="/runslist"
+            render={() =>
+              this.state.auth ? <RunsList resetFireRedirect={this.resetFireRedirect} /> : <Redirect to="/login" />}
           />
         </div>
       </Router>

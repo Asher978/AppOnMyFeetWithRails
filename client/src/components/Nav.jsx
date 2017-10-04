@@ -14,7 +14,7 @@ const Nav = props => {
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <a className="navbar-brand" href="#"><img src={navlogo} alt="" /></a>
+                    <a className="navbar-brand"><img src={navlogo} alt="" /></a>
                 </div>
                 <div className="collapse navbar-collapse" id="MyNavbar">
                     {!Auth.isUserAuthenticated() ? (
@@ -29,7 +29,7 @@ const Nav = props => {
                             <li><Link to="/profile">My Profile</Link></li>
                             <li><Link to="/newrun">Log a Run</Link></li>
                             <li><Link to="/logout" onClick={props.logoutUser}>Log Out</Link></li>
-                            <p className="navbar-text">Signed in as {props.user.firstname}</p>
+                            <p className="navbar-text">Signed in as {props.userName}</p>
                         </ul>
                     )}
                 </div>

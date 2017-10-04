@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004001937) do
+ActiveRecord::Schema.define(version: 20171004004729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20171004001937) do
   create_table "runs", force: :cascade do |t|
     t.date "run_date"
     t.integer "miles"
-    t.string "staring_city"
+    t.string "starting_city"
     t.string "ending_city"
     t.bigint "user_id"
     t.datetime "created_at", null: false

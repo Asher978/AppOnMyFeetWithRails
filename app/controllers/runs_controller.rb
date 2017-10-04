@@ -1,9 +1,9 @@
 class RunsController < ApiController
-    before_action :require_login, except: [:index, :show]
+    before_action :require_login, except: [:show]
 
     def index
-        runs = Runs.all
-        render json: { runs: runs }
+      runs = current_user.runs.all
+      render json: { runs: runs }
     end
 
     def show
@@ -28,7 +28,7 @@ class RunsController < ApiController
 
     private
     def run_params
-      params.require(:run).permit(:run_date, :miles, :starting_street1, :starting_street2, :starting_city, :ending_street1, :ending_street2, :ending_city)
+      params.require(:run).permit(:run_date, :miles, :starting_point, :starting_city, :ending_point, :ending_city)
     end
 
 end

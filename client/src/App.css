@@ -23,8 +23,6 @@ body > .grid {
 .navbar  {
   margin-bottom: 0;
   border-radius: 0;
-  /* background-color: #5E4485; */
-  /* color: #FFF; */
   padding: .5% 0;
   font-size: 1.1em;
   border: 0;
@@ -39,6 +37,7 @@ body > .grid {
 .navbar-brand img  {
   height: 70px;
 }
+
 
 
 /* Color Settings for Nav Bar */
@@ -56,6 +55,7 @@ body > .grid {
 }
 .navbar .navbar-text {
   color: #f2f5f6;
+  font-weight: 500;
 }
 .navbar .navbar-nav > li > a {
   color: #f2f5f6;
@@ -193,3 +193,37 @@ body > .grid {
   margin-top: 4%;
   font-size: 1.6em;
 }
+
+
+/* MAP SETTINGS */
+
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  height: 350px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+
+
+/* RUNS LIST PAGE */
+
+.runslistHeader  {
+  background: #333333;
+  color: #ffffff;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 10px;
+  padding: 2%;
+}
+
+.runslistHeader h1, h3 {
+  text-align: center;
+}
+
+.rundate  {
+  text-align: center;
+  padding: 1%;
+  border-radius: 5px;
+}
+
+

@@ -9,6 +9,7 @@ class Profile extends Component {
     constructor () {
         super();
         this.state = {
+            userDate: null,
             profileData: null,
             runsData: null,
             profileDataLoaded: false,
@@ -26,8 +27,9 @@ class Profile extends Component {
         }).then(res => {
             console.log(res.data)
             this.setState({
-              profileData: res.data.user,
+              userData: res.data.user,
               runsData: res.data.runs,
+              profileData: res.data.profile,
               profileDataLoaded: true,
             })
         })
@@ -58,7 +60,7 @@ class Profile extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-10">
-                                    <h1>Hello {this.state.profileData.firstname}<img className="pic" src={logo} alt={this.state.profileData.firstname}/></h1>
+                                    <h1>Hello {this.state.userData.firstname}<img className="pic" src={this.state.profileData.picture} alt={this.state.userData.firstname}/></h1>
                                     <h4>Welcome to your running Profile</h4>
                                 </div>
                                 <div className="col-md-2">
@@ -68,8 +70,8 @@ class Profile extends Component {
                                             <span className="caret"></span>
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="">Update Profile</a></li>
-                                            <li><a href="">Add Profile Picture</a></li>
+                                            <li><Link to="/updateprofile">Update Profile</Link></li>
+                                            <li><Link to="/uploadpic">Add/Update Profile Picture</Link></li>
                                         </ul>
                                     </div>
                                 </div>

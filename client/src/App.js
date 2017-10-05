@@ -15,6 +15,8 @@ import Nav from './components/Nav';
 import Profile from './components/Profile';
 import RunCreate from './components/RunCreate';
 import RunsList from './components/RunsList';
+import UpdateProfile from './components/UpdateProfile';
+import UploadPic from './components/UploadPic';
 
 class App extends Component {
   constructor () {
@@ -36,13 +38,19 @@ class App extends Component {
       runStartCity: '',
       runEnd: '',
       runEndCity: '',
+      full_marathons: '',
+      half_marathons: '',
+      uploadedPic: null,
     }
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
     this.handleRunSubmit = this.handleRunSubmit.bind(this);
     this.resetFireRedirect = this.resetFireRedirect.bind(this);
+    this.handleUpdateProfile = this.handleUpdateProfile.bind(this);
+    
   }
 
   handleInputChange(e) {
@@ -154,6 +162,34 @@ class App extends Component {
     }
   }
 
+  
+
+  handleUpdateProfile (e) {
+    e.preventDefault();
+    axios('/profile', {
+      method: 'PUT',
+      data: {
+        profile: {
+          half_marathons: this.state.half_marathons,
+          full_marathons: this.state.full_marathons,
+        }
+      },
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      }
+    }).then(res => {
+      this.setState({
+        shouldFireRedirect: true,
+        half_marathons: '',
+        full_marathons: '',
+      });
+    }).catch(err => {
+      console.log(err);
+    });
+    e.target.reset();
+  }
+
   render() {
     return (
       <Router>
@@ -220,6 +256,33 @@ class App extends Component {
             path="/runslist"
             render={() =>
               this.state.auth ? <RunsList resetFireRedirect={this.resetFireRedirect} /> : <Redirect to="/login" />}
+          />
+          <Route 
+            exact
+            path="/updateprofile"
+            render={() => 
+              this.state.auth ? (
+                <UpdateProfile
+                  half_marathons={this.state.half_marathons}
+                  full_marathons={this.state.full_marathons}
+                  handleInputChange={this.handleInputChange}
+                  handleUpdateProfile={this.handleUpdateProfile}
+                  shouldFireRedirect={this.state.shouldFireRedirect}
+                /> 
+              ) : (
+                <Redirect to="/login" />
+              )}
+          />
+          <Route 
+            exact
+            path="/uploadpic"
+            render={() => 
+              this.state.auth ? (
+                <UploadPic shouldFireRedirect={this.state.shouldFireRedirect} />
+              ) : (
+                <Redirect to="/login" />
+              )
+            } 
           />
         </div>
       </Router>

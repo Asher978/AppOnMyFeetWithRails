@@ -12,7 +12,7 @@ class UsersController < ApiController
         user_profile = user.profile
         render json: { user: { username: user.username, email: user.email, firstname: user.firstname, lastname: user.lastname, admin: user.admin },
         runs: user_runs,
-        profile: user_profile,
+        profile: user.profile,
       }
       end
     

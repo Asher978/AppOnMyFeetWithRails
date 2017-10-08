@@ -3,6 +3,7 @@ import axios from 'axios';
 import Auth from '../modules/Auth';
 import logo from '../Mypic.jpeg';
 import { Link } from 'react-router-dom';
+import profilePic from '../assets/Profile.jpg';
 
 
 class Profile extends Component {
@@ -60,7 +61,11 @@ class Profile extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-10">
-                                    <h1>Hello {this.state.userData.firstname}<img className="pic" src={this.state.profileData.picture} alt={this.state.userData.firstname}/></h1>
+                                    <h1>Hello {this.state.userData.firstname}<img className="pic"
+                                                                                    src={(this.state.profileData.picture) ? (this.state.profileData.picture) : (profilePic)}
+                                                                                    alt={this.state.userData.firstname}
+                                                                            />
+                                    </h1>
                                     <h4>Welcome to your running Profile</h4>
                                 </div>
                                 <div className="col-md-2">
@@ -94,8 +99,8 @@ class Profile extends Component {
                                     <span className="glyphicon glyphicon-hand-right" aria-hidden="true"></span> Last Run
                                     </a>
                                     <Link to="/runslist" className="list-group-item"><span className="glyphicon glyphicon-random" aria-hidden="true"></span>&nbsp;All Runs <span className="badge">{this.state.runsData.length}</span></Link>
-                                    <a href="" className="list-group-item"><span className="glyphicon glyphicon-adjust" aria-hidden="true"></span>&nbsp;Half Marathons <span className="badge">2</span></a>
-                                    <a href="" className="list-group-item"><span className="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;Full Marathons <span className="badge">1</span></a>
+                                    <a href="" className="list-group-item"><span className="glyphicon glyphicon-adjust" aria-hidden="true"></span>&nbsp;Half Marathons <span className="badge">{(this.state.profileData.half_marathons) ? (this.state.profileData.half_marathons) : 0}</span></a>
+                                    <a href="" className="list-group-item"><span className="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;Full Marathons <span className="badge">{(this.state.profileData.full_marathons) ? (this.state.profileData.full_marathons) : 0}</span></a>
                                     </div>
                                 </div>
                                 <div className="col-md-9">
@@ -112,13 +117,13 @@ class Profile extends Component {
                                         </div>
                                         <div className="col-md-4">
                                             <div className="well dash-box">
-                                                <h2><span className="glyphicon glyphicon-adjust" aria-hidden="true"></span> 2</h2>
+                                                <h2><span className="glyphicon glyphicon-adjust" aria-hidden="true"></span> {(this.state.profileData.half_marathons) ? (this.state.profileData.half_marathons) : 0}</h2>
                                                 <h4>Half Marathon</h4>
                                             </div>
                                         </div>
                                         <div className="col-md-4">
                                             <div className="well dash-box">
-                                                <h2><span className="glyphicon glyphicon-cd" aria-hidden="true"></span> 1</h2>
+                                                <h2><span className="glyphicon glyphicon-cd" aria-hidden="true"></span> {(this.state.profileData.full_marathons) ? (this.state.profileData.full_marathons) : 0}</h2>
                                                 <h4>Full Marathons</h4>
                                             </div>
                                         </div>

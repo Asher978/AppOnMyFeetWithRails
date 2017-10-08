@@ -94,9 +94,10 @@ class App extends Component {
       }
     }).then(res => {
       if (res.data.token) {
-        Auth.authenticateToken(res.data.token);
+        Auth.authenticateToken(res.data.token, res.data.user.firstname);
         this.setState({
           auth: Auth.isUserAuthenticated(),
+          userName: Auth.getUserName(),
         })
       }
     }).catch(err => {

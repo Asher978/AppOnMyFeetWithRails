@@ -28,6 +28,7 @@ const Nav = props => {
                             <li><Link to="/">Home</Link></li>                                
                             <li><Link to="/profile">My Profile</Link></li>
                             <li><Link to="/newrun">Log a Run</Link></li>
+                            <li><Link to="/startrun">Start your Run</Link></li>
                             <li><Link to="/logout" onClick={props.logoutUser}>Log Out</Link></li>
                             <p className="navbar-text">Signed in as {props.userName}</p>
                         </ul>

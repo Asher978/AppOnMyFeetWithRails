@@ -4,6 +4,7 @@ class User < ApplicationRecord
     has_secure_token :auth_token
     has_many :runs
     has_one :profile
+    has_many :trackruns
     after_create :build_profile
     accepts_nested_attributes_for :profile
   

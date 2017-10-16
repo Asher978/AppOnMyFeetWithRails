@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005002838) do
+ActiveRecord::Schema.define(version: 20171015143246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 20171005002838) do
     t.index ["user_id"], name: "index_runs_on_user_id"
   end
 
+  create_table "trackruns", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.json "rundata", default: []
+    t.index ["user_id"], name: "index_trackruns_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "firstname"
@@ -53,4 +61,5 @@ ActiveRecord::Schema.define(version: 20171005002838) do
     t.index ["username"], name: "index_users_on_username"
   end
 
+  add_foreign_key "trackruns", "users"
 end

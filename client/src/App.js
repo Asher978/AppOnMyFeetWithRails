@@ -17,6 +17,7 @@ import RunCreate from './components/RunCreate';
 import RunsList from './components/RunsList';
 import UpdateProfile from './components/UpdateProfile';
 import UploadPic from './components/UploadPic';
+import RunStart from './components/RunStart';
 
 class App extends Component {
   constructor () {
@@ -284,6 +285,18 @@ class App extends Component {
                 <Redirect to="/login" />
               )
             } 
+          />
+          <Route
+            exact
+            path="/startrun"
+            render={() =>
+              this.state.auth ? (
+                <RunStart
+                  shouldFireRedirect={this.state.shouldFireRedirect}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )}
           />
         </div>
       </Router>

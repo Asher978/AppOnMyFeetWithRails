@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   resources :users
   resource :profile, only: [:show, :update]
   resources :runs
+  resources :trackruns
   
 end

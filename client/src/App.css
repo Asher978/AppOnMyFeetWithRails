@@ -198,8 +198,8 @@ body > .grid {
 /* MAP SETTINGS */
 
 .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
-  height: 350px;
-  width: 300px;
+  height: 550px;
+  width: 100vw;
   margin: 0 auto;
 }
 

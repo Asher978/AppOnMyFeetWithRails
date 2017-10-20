@@ -22,22 +22,22 @@ class RunStart extends Component {
   }
 
 
-  getPosition () {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      console.log(pos);
-      if(pos.coords) {
-        this.setState({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-          posReceived: true,
-        })
-      }
-    })
-  }
+  // getPosition () {
+  //   navigator.geolocation.getCurrentPosition((pos) => {
+  //     console.log(pos);
+  //     if(pos.coords) {
+  //       this.setState({
+  //         lat: pos.coords.latitude,
+  //         lng: pos.coords.longitude,
+  //         posReceived: true,
+  //       })
+  //     }
+  //   })
+  // }
 
-  error (err) {
-    console.warn('ERROR(' + err.code + '): ' + err.message);
-  }
+  // error (err) {
+  //   console.warn('ERROR(' + err.code + '): ' + err.message);
+  // }
 
   componentDidMount () {
     navigator.geolocation.getCurrentPosition((pos) => {
@@ -50,6 +50,10 @@ class RunStart extends Component {
       }
     })
   } 
+
+  componentWillReceiveProps(nextProps) {
+    console.log(this.nextProps)
+  }
 
 
 

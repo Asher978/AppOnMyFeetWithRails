@@ -51,8 +51,17 @@ class RunStart extends Component {
     })
   } 
 
-  componentWillReceiveProps(nextProps) {
-    console.log(this.nextProps)
+  componentDidUdate() {
+    console.log(this.state)
+    navigator.geolocation.getCurrentPosition((pos) => {
+      if(pos.coords) {
+        this.setState({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+          posReceived: true,
+        })
+      }
+    })
   }
 
 

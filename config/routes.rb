@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   resource :profile, only: [:show, :update]
   resources :runs
   resources :trackruns
+
+  root to: "root#index"
   
 end

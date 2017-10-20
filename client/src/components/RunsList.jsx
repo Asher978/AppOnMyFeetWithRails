@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
 import { Link } from 'react-router-dom';
 import Auth from '../modules/Auth';
 import axios from 'axios';
@@ -19,36 +19,56 @@ class RunsList extends Component {
 
     componentDidMount() {
         this.props.resetFireRedirect()
-        axios('/runs', {
+        axios('/trackruns', {
             method: 'GET',
             headers: {
               'Authorization': `Token ${Auth.getToken()}`,
               token: `${Auth.getToken()}`,
             }
         }).then(res => {
-            console.log(res)
+            console.log(res.data.trackruns)
             this.setState({
-              runsData: res.data.runs,
+              runsData: res.data.trackruns,
               runsDataLoaded: true,
             })
         })
     }
 
-    renderMap (x, y, p, c) {
-        const position = [x, y];        
-        return (
-            <Map center={position} zoom={18}>
-                <TileLayer
-                url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                />
-                <Marker position={position}>
-                    <Popup>
-                        <span>{p}<br/>{c}.</span>
-                    </Popup>
-                </Marker>
-            </Map>
-        )
+    renderMap (runArray) {
+        if(this.state.runsDataLoaded) {
+            // array prep for Polyline
+            const polyPos = [];
+            polyPos.push(runArray)
+
+            // position prep for Map center
+            const centerPos = runArray[runArray.length-1];
+
+            // Map prep
+            const mapId = 'mapbox.streets';
+            const access_token = 'pk.eyJ1IjoiYXNoZXI5NzgiLCJhIjoiY2o1eTVmNXlnMGJ2NjJ5cWRxMTRtY2hsMSJ9.y7O2ehEprrX26JpPyZatrQ';
+            const options = {
+                color: 'red',
+                weight: 7,
+                opacity: .7,
+                dashArray: '5,1',
+                lineJoin: 'round'
+            }
+
+            return (
+                <Map center={centerPos} zoom={15}>
+                    <TileLayer
+                        url={`https://api.tiles.mapbox.com/v4/${mapId}/{z}/{x}/{y}.png?access_token=${access_token}`}
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    <Marker position={runArray[0]}>
+                        {/* <Popup>
+                            <span>{p}<br/>{c}.</span>
+                        </Popup> */}
+                    </Marker>
+                    <Polyline positions={polyPos} color={'red'}/>
+                </Map>
+            )
+        }
     }
 
     renderRunsList () {
@@ -57,9 +77,10 @@ class RunsList extends Component {
                 return (
                     <div className="col-sm-6 col-md-4" key={run.id}>
                         <div className="thumbnail">
-                            {this.renderMap(run.latitude, run.longitude, run.starting_point, run.starting_city)}
+                            {this.renderMap(run.rundata.rundata)}
                         <div className="caption">
-                            <h3 className="main-color-bg rundate">{`${moment(run.run_date).format('MMM D, Y')}`}</h3>
+                            <h3 className="main-color-bg rundate">{`${moment(run.created_at
+).format('MMM D, Y')}`}</h3>
                             <p>{run.miles} miles</p>
                             <p>Your run was from {run.starting_point} to {run.ending_point}.</p>
                             <a href="" className="btn main-color-bg" role="button">View this Run!</a>

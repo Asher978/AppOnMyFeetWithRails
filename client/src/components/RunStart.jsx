@@ -41,7 +41,7 @@ class RunStart extends Component {
 
   componentDidMount () {
     console.log('did mount')
-    navigator.geolocation.getCurrentPosition((pos) => {
+    navigator.geolocation.watchPosition((pos) => {
       if(pos.coords) {
         this.setState({
           lat: pos.coords.latitude,

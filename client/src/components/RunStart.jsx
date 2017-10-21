@@ -39,20 +39,8 @@ class RunStart extends Component {
   //   console.warn('ERROR(' + err.code + '): ' + err.message);
   // }
 
-  // componentDidMount () {
-  //   navigator.geolocation.getCurrentPosition((pos) => {
-  //     if(pos.coords) {
-  //       this.setState({
-  //         lat: pos.coords.latitude,
-  //         lng: pos.coords.longitude,
-  //         posReceived: true,
-  //       })
-  //     }
-  //   })
-  // } 
-
-  componentDidUdate() {
-    console.log('did Update--->', this.state)
+  componentDidMount () {
+    console.log('did mount')
     navigator.geolocation.getCurrentPosition((pos) => {
       if(pos.coords) {
         this.setState({
@@ -62,6 +50,10 @@ class RunStart extends Component {
         })
       }
     })
+  } 
+
+  componentWillReceiveProps(nextProps) {
+   console.log('Props received--->', this.nextProps)
   }
 
 

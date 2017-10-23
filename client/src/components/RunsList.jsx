@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../modules/Auth';
 import axios from 'axios';
 import moment from 'moment';
+import RunSingle from './RunSingle';
 
 
 
@@ -75,7 +76,16 @@ class RunsList extends Component {
         if(this.state.runsDataLoaded && this.state.runsData.length > 0) {
             return this.state.runsData.map(run => {
                 return (
-                    <div className="col-sm-6 col-md-4" key={run.id}>
+                    <div className="col-sm-6 col-md-4">
+                    <RunSingle key={run.id}
+                               renderMap={this.renderMap}
+                               rundata={run.rundata.rundata}
+                               created={run.created_at}
+                               miles={run.miles}
+                               start={run.starting_point}
+                               end={run.ending_point}                
+                     />
+                    {/* <div className="col-sm-6 col-md-4" key={run.id}>
                         <div className="thumbnail">
                             {this.renderMap(run.rundata.rundata)}
                         <div className="caption">
@@ -85,7 +95,8 @@ class RunsList extends Component {
                             <p>Your run was from {run.starting_point} to {run.ending_point}.</p>
                             <a href="" className="btn main-color-bg" role="button">View this Run!</a>
                         </div>
-                        </div>
+                        </div> */}
+                    
                     </div>
                 )
             })

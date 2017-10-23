@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../modules/Auth';
 import axios from 'axios';
 import moment from 'moment';
-import RunSingle from './RunSingle';
+import Run from './Run';
 
 
 
@@ -77,13 +77,14 @@ class RunsList extends Component {
             return this.state.runsData.map(run => {
                 return (
                     <div className="col-sm-6 col-md-4">
-                    <RunSingle key={run.id}
-                               renderMap={this.renderMap}
-                               rundata={run.rundata.rundata}
-                               created={run.created_at}
-                               miles={run.miles}
-                               start={run.starting_point}
-                               end={run.ending_point}                
+                    <Run key={run.id}
+                            id={run.id}
+                            rundata={run.rundata.rundata}
+                            renderMap={this.renderMap}
+                            created={run.created_at}
+                            miles={run.miles}
+                            start={run.starting_point}
+                            end={run.ending_point}
                      />
                     {/* <div className="col-sm-6 col-md-4" key={run.id}>
                         <div className="thumbnail">

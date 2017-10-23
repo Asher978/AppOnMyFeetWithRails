@@ -1,5 +1,5 @@
 class TrackrunsController < ApiController
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, except: [:index]
 
   def index
     trackruns = current_user.trackruns.all
@@ -19,7 +19,10 @@ class TrackrunsController < ApiController
     else
       render json: {message: 'Could not create run'}
     end
+  end
 
+  def show
+    
   end
 
 

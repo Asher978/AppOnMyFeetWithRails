@@ -37,39 +37,38 @@ class RunsList extends Component {
 
     renderMap (runArray) {
         
-            // array prep for Polyline
-            const polyPos = [];
-            polyPos.push(runArray)
+        // array prep for Polyline
+        const polyPos = [];
+        polyPos.push(runArray)
 
-            // position prep for Map center
-            const centerPos = runArray[runArray.length-1];
+        // position prep for Map center
+        const centerPos = runArray[runArray.length-1];
 
-            // Map prep
-            const mapId = 'mapbox.streets';
-            const access_token = 'pk.eyJ1IjoiYXNoZXI5NzgiLCJhIjoiY2o1eTVmNXlnMGJ2NjJ5cWRxMTRtY2hsMSJ9.y7O2ehEprrX26JpPyZatrQ';
-            const options = {
-                color: 'red',
-                weight: 7,
-                opacity: .7,
-                dashArray: '5,1',
-                lineJoin: 'round'
-            }
+        // Map prep
+        const mapId = 'mapbox.streets';
+        const access_token = 'pk.eyJ1IjoiYXNoZXI5NzgiLCJhIjoiY2o1eTVmNXlnMGJ2NjJ5cWRxMTRtY2hsMSJ9.y7O2ehEprrX26JpPyZatrQ';
+        const options = {
+            color: 'red',
+            weight: 7,
+            opacity: .7,
+            dashArray: '5,1',
+            lineJoin: 'round'
+        }
 
-            return (
-                <Map center={centerPos} zoom={15}>
-                    <TileLayer
-                        url={`https://api.tiles.mapbox.com/v4/${mapId}/{z}/{x}/{y}.png?access_token=${access_token}`}
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                    <Marker position={runArray[0]}>
-                        {/* <Popup>
-                            <span>{p}<br/>{c}.</span>
-                        </Popup> */}
-                    </Marker>
-                    <Polyline positions={polyPos} color={'red'}/>
-                </Map>
-            )
-        
+        return (
+            <Map center={centerPos} zoom={15}>
+                <TileLayer
+                    url={`https://api.tiles.mapbox.com/v4/${mapId}/{z}/{x}/{y}.png?access_token=${access_token}`}
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={runArray[0]}>
+                    {/* <Popup>
+                        <span>{p}<br/>{c}.</span>
+                    </Popup> */}
+                </Marker>
+                <Polyline positions={polyPos} color={'red'}/>
+            </Map>
+        )
     }
 
     renderRunsList () {
@@ -80,25 +79,12 @@ class RunsList extends Component {
                     <Run key={run.id}
                             id={run.id}
                             rundata={run.rundata.rundata}
-                            runsDataLoaded={this.state.runsDataLoaded}
                             renderMap={this.renderMap}
                             created={run.created_at}
                             miles={run.miles}
                             start={run.starting_point}
                             end={run.ending_point}
                      />
-                    {/* <div className="col-sm-6 col-md-4" key={run.id}>
-                        <div className="thumbnail">
-                            {this.renderMap(run.rundata.rundata)}
-                        <div className="caption">
-                            <h3 className="main-color-bg rundate">{`${moment(run.created_at
-).format('MMM D, Y')}`}</h3>
-                            <p>{run.miles} miles</p>
-                            <p>Your run was from {run.starting_point} to {run.ending_point}.</p>
-                            <a href="" className="btn main-color-bg" role="button">View this Run!</a>
-                        </div>
-                        </div> */}
-                    
                     </div>
                 )
             })

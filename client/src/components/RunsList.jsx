@@ -36,7 +36,7 @@ class RunsList extends Component {
     }
 
     renderMap (runArray) {
-        if(this.state.runsDataLoaded) {
+        
             // array prep for Polyline
             const polyPos = [];
             polyPos.push(runArray)
@@ -69,7 +69,7 @@ class RunsList extends Component {
                     <Polyline positions={polyPos} color={'red'}/>
                 </Map>
             )
-        }
+        
     }
 
     renderRunsList () {
@@ -80,6 +80,7 @@ class RunsList extends Component {
                     <Run key={run.id}
                             id={run.id}
                             rundata={run.rundata.rundata}
+                            runsDataLoaded={this.state.runsDataLoaded}
                             renderMap={this.renderMap}
                             created={run.created_at}
                             miles={run.miles}

@@ -93,6 +93,7 @@ class RunStart extends Component {
       this.setState({ runData: run, runID: watchId })
       console.log('from start run', this.state.runData)
     })
+    alert('Your run has started!')
   }
 
   handleStopRun (e) {
@@ -121,6 +122,7 @@ class RunStart extends Component {
     }).catch(err => {
       console.log(err);
     });
+    alert('Your run has ended!')
   }
 
   render () {

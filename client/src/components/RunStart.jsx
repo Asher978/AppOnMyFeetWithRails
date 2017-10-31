@@ -41,7 +41,7 @@ class RunStart extends Component {
 
   componentDidMount () {
     console.log('did mount')
-    navigator.geolocation.watchPosition((pos) => {
+    this.ID = navigator.geolocation.watchPosition((pos) => {
       if(pos.coords) {
         this.setState({
           lat: pos.coords.latitude,
@@ -52,8 +52,8 @@ class RunStart extends Component {
     })
   } 
 
-  componentWillReceiveProps(nextProps) {
-   console.log('Props received--->', this.nextProps)
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.ID);
   }
 
 

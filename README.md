@@ -27,4 +27,6 @@ Things you may want to know about this project:
 
 - [ ] Calculating time, distance and speed of the run - in progress...
 
+- [ ] Styling of the map component after showing the list of runs - in progress...
+
 This project is currently in development and the progress will be updated on weekly basis. I am looking for contributors and if you wish to contribute to this project, please send me a message.
